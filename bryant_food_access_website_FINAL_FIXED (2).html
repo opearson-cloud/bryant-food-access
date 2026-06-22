@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We've Got You | Bryant Food Access</title>
+  <style>
+    :root {
+      --green: #2f5d46;
+      --dark-green: #1f3f31;
+      --soft-green: #e8f1e7;
+      --cream: #fbf7ef;
+      --gold: #f3c969;
+      --text: #1f2a24;
+      --muted: #637168;
+      --card: #ffffff;
+      --shadow: 0 10px 28px rgba(22, 50, 36, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+    }
+
+    header {
+      background: rgba(47, 93, 70, 0.96);
+      color: white;
+      padding: 18px 9%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.14);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-badge {
+      background: white;
+      color: var(--green);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .hero {
+      padding: 80px 9%;
+      background:
+        linear-gradient(110deg, rgba(232,241,231,0.96), rgba(255,247,224,0.94)),
+        radial-gradient(circle at 85% 20%, #f3c969 0, transparent 28%);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 46px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      line-height: 1;
+      margin: 0 0 18px;
+      color: var(--dark-green);
+      letter-spacing: -1.8px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      line-height: 1.55;
+      max-width: 720px;
+      margin: 0;
+      color: #35443c;
+    }
+
+    .tag {
+      display: inline-block;
+      background: white;
+      color: var(--green);
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .buttons { margin-top: 30px; }
+
+    .buttons a, button {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      padding: 14px 22px;
+      margin: 8px 8px 8px 0;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 15px;
+      box-shadow: 0 6px 16px rgba(47,93,70,0.25);
+    }
+
+    .buttons a.secondary {
+      background: white;
+      color: var(--green);
+    }
+
+    .hero-visual {
+      background: white;
+      border-radius: 28px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone {
+      background: #f7faf7;
+      border: 10px solid #222;
+      border-radius: 32px;
+      min-height: 510px;
+      padding: 24px;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .phone-top {
+      width: 88px;
+      height: 8px;
+      background: #222;
+      border-radius: 999px;
+      margin: 0 auto 22px;
+    }
+
+    .phone-card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.08);
+    }
+
+    .phone-card strong {
+      color: var(--green);
+    }
+
+    .status {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      padding: 0 9%;
+      margin-top: -34px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .stat .number {
+      font-size: 34px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .stat p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    section {
+      padding: 62px 9%;
+    }
+
+    .section-title {
+      max-width: 800px;
+      margin-bottom: 28px;
+    }
+
+    h2 {
+      font-size: 36px;
+      color: var(--dark-green);
+      margin: 0 0 10px;
+      letter-spacing: -0.8px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 26px;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(47,93,70,0.08);
+    }
+
+    .icon {
+      width: 54px;
+      height: 54px;
+      background: var(--soft-green);
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      margin-bottom: 16px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--green);
+      font-size: 22px;
+    }
+
+    .card p {
+      color: #4f5d55;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .quiz-wrap {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .side-panel {
+      background: var(--dark-green);
+      color: white;
+      padding: 32px;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      min-height: 100%;
+    }
+
+    .side-panel h3 {
+      color: white;
+      margin-top: 0;
+      font-size: 28px;
+    }
+
+    .side-panel p {
+      line-height: 1.55;
+      color: #eef5ef;
+    }
+
+    .side-panel .mini {
+      background: rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .quiz {
+      background: white;
+      border-radius: 22px;
+      padding: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: bold;
+      color: #26352d;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+      border: 1px solid #c9d2cc;
+      font-size: 16px;
+      background: #fbfdfb;
+    }
+
+    .message {
+      background: #fff7d6;
+      padding: 20px;
+      border-radius: 14px;
+      margin-top: 22px;
+      display: none;
+      border-left: 6px solid var(--gold);
+      line-height: 1.45;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 18px;
+    }
+
+    .step {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-number {
+      background: var(--gold);
+      color: #2b2b2b;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .feedback {
+      background: linear-gradient(110deg, var(--green), var(--dark-green));
+      color: white;
+      border-radius: 26px;
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 130px;
+      border: none;
+      border-radius: 14px;
+      padding: 16px;
+      font-size: 16px;
+      resize: vertical;
+    }
+
+    .stars {
+      font-size: 28px;
+      letter-spacing: 4px;
+      color: var(--gold);
+      margin: 12px 0;
+    }
+
+    footer {
+      background: var(--dark-green);
+      color: white;
+      text-align: center;
+      padding: 26px;
+      margin-top: 30px;
+    }
+
+    @media (max-width: 850px) {
+      .hero, .quiz-wrap, .feedback {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 {
+        font-size: 42px;
+      }
+      nav {
+        display: none;
+      }
+      .status {
+        grid-template-columns: 1fr;
+        margin-top: 0;
+        padding-top: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><span class="logo-badge">🍽️</span> We've Got You</div>
+    <nav>
+      <a href="#resources">Resources</a>
+      <a href="#quiz">Self Assessment</a>
+      <a href="#process">How It Works</a>
+      <a href="#help">Get Help</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <span class="tag">Confidential • Supportive • For Students</span>
+        <h1>You are not alone.</h1>
+        <p>
+          A private student-centered website that helps Bryant students learn about food insecurity,
+          find campus resources, and request support without fear of judgment.
+        </p>
+        <div class="buttons">
+          <a href="#quiz">Take the Self Assessment</a>
+          <a class="secondary" href="#resources">Explore Resources</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Website preview illustration">
+        <div class="phone">
+          <div class="phone-top"></div>
+          <div class="phone-card">
+            <strong>Meal Support Approved</strong>
+            <p>Your recommended support plan has been added privately.</p>
+          </div>
+          <div class="phone-card">
+            <strong>50 Meal Swipes</strong>
+            <p>For students reporting significant food insecurity.</p>
+          </div>
+          <div class="phone-card">
+            <strong>Grab-and-Go Snacks</strong>
+            <p>Quick access when schedules make meals difficult.</p>
+          </div>
+          <div class="phone-card">
+            <strong>Grocery Support Referral</strong>
+            <p>Summer and basic needs support when available.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding:50px 9% 20px; text-align:center;">
+      <h2 style="text-align:center; margin-bottom:20px;">How We Can Help</h2>
+      <div class="status" style="margin-top:0; position:static;">
+        <div class="stat">
+          <div class="number">📚</div>
+          <p><strong>Find Resources</strong><br>Learn about meal swipes, grab-and-go snacks, grocery support, and other campus resources.</p>
+        </div>
+        <div class="stat">
+          <div class="number">✅</div>
+          <p><strong>Assess Your Needs</strong><br>Take a short, private self assessment to identify support options.</p>
+        </div>
+        <div class="stat">
+          <div class="number">🤝</div>
+          <p><strong>Get Connected</strong><br>Connect with campus support services confidentially and access resources that fit your needs.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="resources">
+      <div class="section-title">
+        <h2>Campus Food Resources</h2>
+        <p>Students have different needs, so this prototype connects them to several types of support instead of assuming one solution fits everyone.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🍽️</div>
+          <h3>Meal Swipe Support</h3>
+          <p>Students can request meal swipes when they need help accessing meals on campus.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🥨</div>
+          <h3>Grab-and-Go Snacks</h3>
+          <p>Quick snack bags help students who need food between classes, practices, work, or activities.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🥗</div>
+          <h3>Summer Groceries</h3>
+          <p>Students staying on campus during breaks may receive grocery support based on actual needs.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧼</div>
+          <h3>Basic Needs Support</h3>
+          <p>Food insecurity can overlap with hygiene, housing, and financial needs. Support can be connected discreetly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz">
+      <div class="section-title">
+        <h2>Private Self Assessment</h2>
+        <p>This example shows how students could answer a few private questions and receive a recommended support plan.</p>
+      </div>
+
+      <div class="quiz-wrap">
+        <div class="side-panel">
+          <h3>Why this matters</h3>
+          <p>Many students do not identify their situation as food insecurity. This tool helps normalize support and shows that asking for help is okay.</p>
+          <div class="mini">
+            <strong>Dignity first:</strong>
+            <p>Responses are used only to connect students with resources.</p>
+          </div>
+          <div class="mini">
+            <strong>Not one-size-fits-all:</strong>
+            <p>Different answers lead to different levels of support.</p>
+          </div>
+        </div>
+
+        <div class="quiz">
+          <label>1. How often do you skip meals because of cost or limited meal swipes?</label>
+          <select id="q1">
+            <option value="0">Never</option>
+            <option value="1">Sometimes</option>
+            <option value="2">Often</option>
+          </select>
+
+          <label>2. How many meal swipes do you usually have left at the end of the week?</label>
+          <select id="q2">
+            <option value="0">Enough for my needs</option>
+            <option value="1">Only a few</option>
+            <option value="2">Almost none or none</option>
+          </select>
+
+          <label>3. Do food costs stop you from attending dining hall meetings, events, or study sessions?</label>
+          <select id="q3">
+            <option value="0">No</option>
+            <option value="1">Sometimes</option>
+            <option value="2">Yes, often</option>
+          </select>
+
+          <label>4. Do you worry about having enough food during the week?</label>
+          <select id="q4">
+            <option value="0">Rarely or never</option>
+            <option value="1">Sometimes</option>
+            <option value="2">Often</option>
+          </select>
+
+          <label>5. Would grab-and-go snacks or grocery support help you feel more secure?</label>
+          <select id="q5">
+            <option value="0">No</option>
+            <option value="1">Maybe</option>
+            <option value="2">Yes</option>
+          </select>
+
+          <button onclick="calculateSupport()">See My Support Options</button>
+
+          <div class="message" id="message"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="section-title">
+        <h2>How It Works</h2>
+        <p>The design keeps the process simple, private, and connected to existing campus supports.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Find the site</h3>
+          <p>Students scan a QR code or visit the website from a campus resource page.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Answer privately</h3>
+          <p>Students complete a short self assessment without being publicly identified.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Get matched</h3>
+          <p>The site recommends meal swipes, snacks, groceries, or follow-up support.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Improve access</h3>
+          <p>Student feedback helps improve the site and reduce future barriers.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="help">
+      <div class="feedback">
+        <div>
+          <h2 style="color:white;">Help Us Improve</h2>
+          <p>Your feedback helps us understand what students need and how to make food resources easier to access.</p>
+          <div class="stars">★ ★ ★ ★ ★</div>
+          <p><strong>No one should go hungry.</strong></p>
+        </div>
+        <div>
+          <textarea placeholder="What would make food support easier, safer, or more private for students?"></textarea>
+          <button onclick="alert('Thank you for your feedback. This prototype shows how student input would guide future improvements.')">Submit Feedback</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    You are not alone. Support is here. When students support students, we all thrive.
+  </footer>
+
+  <script>
+    function calculateSupport() {
+      let score = 0;
+      for (let i = 1; i <= 5; i++) {
+        score += parseInt(document.getElementById("q" + i).value);
+      }
+
+      let swipes = 0;
+      let supportText = "";
+
+      if (score <= 2) {
+        swipes = 20;
+        supportText = "You may benefit from light support, such as 20 meal swipes and access to grab-and-go snacks.";
+      } else if (score <= 6) {
+        swipes = 35;
+        supportText = "You may benefit from moderate support, such as 35 meal swipes, snack bags, and help learning about available campus resources.";
+      } else {
+        swipes = 50;
+        supportText = "You may benefit from stronger support, such as 50 meal swipes, grocery assistance, and a confidential follow-up with Student Support Services.";
+      }
+
+      document.getElementById("message").style.display = "block";
+      document.getElementById("message").innerHTML =
+        "<strong>Recommended Support Plan: " + swipes + " meal swipes</strong><br><br>" +
+        supportText +
+        "<br><br><em>This is only a prototype example. In a real program, staff would review each student's situation privately and respectfully.</em>";
+    }
+  </script>
+</body>
+</html>
